@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "Github Status Checks Notification",
+    "version": "0.1",
+    "description": "Sends you a desktop notification when Github status checks pass or fail",
+    "icons": {
+      "128": "icon_128.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://github.com/*/pull/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "web_accessible_resources": ["parrot.gif", "sadparrot.gif"]
+  }
