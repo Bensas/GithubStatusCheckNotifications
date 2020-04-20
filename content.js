@@ -17,7 +17,7 @@ window.onload = function(){
     if (currentStatus !== prevStatus && currentStatus !== STATUS_RUNNING){
       sendNotification(currentStatus, prNumber);
     }
-  },  10000); //Called every 5 seconds
+  },  5000); //Called every 5 seconds
 };
 
 sendNotification = function(status, prNumber){
