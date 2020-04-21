@@ -13,11 +13,12 @@ window.onload = function(){
   currentStatus = getStatus(statusMessageElements);
   setInterval(function() {
     prevStatus = currentStatus;
+    statusMessageElements = Array.from(document.getElementsByClassName('status-heading'));
     currentStatus = getStatus(statusMessageElements);
     if (currentStatus !== prevStatus && currentStatus !== STATUS_RUNNING){
       sendNotification(currentStatus, prNumber);
     }
-  },  10000); //Called every 5 seconds
+  },  5000); //Called every 5 seconds
 };
 
 sendNotification = function(status, prNumber){
@@ -48,7 +49,7 @@ getStatus = function(statusElements){
         elemContainsText(statusElements[i],'All checks have failed')){
       return STATUS_FAILED;
     }
-    else if (elemContainsText(statusElements[i],'Some checks haven\'t completed yet')){
+    else if (elemContainsText(statusElements[i],'Some checks haven’t completed yet')){
       return STATUS_RUNNING;
     }
     else if (elemContainsText(statusElements[i], 'All checks have passed')){
