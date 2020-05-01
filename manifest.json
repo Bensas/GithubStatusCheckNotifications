@@ -1,14 +1,14 @@
 {
     "manifest_version": 2,
     "name": "Github Status Checks Notification",
-    "version": "0.2",
+    "version": "0.3",
     "description": "Sends you a desktop notification when Github status checks pass or fail",
     "icons": {
       "128": "icon_128.png"
     },
     "content_scripts": [
       {
-        "matches": ["https://github.com/*/pull/*"],
+        "matches": ["https://github.com/*/pull/*", "https://github.com/*/pull/*/"],
         "js": ["content.js"]
       }
     ],

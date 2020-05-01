@@ -1,22 +1,24 @@
 const STATUS_RUNNING = 'running';
 const STATUS_FAILED = 'failed';
 const STATUS_PASSED = 'passed';
+const STATUS_EMPTY = 'empty';
 
 window.onload = function(){
   checkForNotificationSupport();
 
   var currentStatus;
-  var prNumber;
   var statusMessageElements = Array.from(document.getElementsByClassName('status-heading'));
-  prNumber = window.location.href.split('/pull/')[1];
 
   currentStatus = getStatus(statusMessageElements);
   setInterval(function() {
     prevStatus = currentStatus;
     statusMessageElements = Array.from(document.getElementsByClassName('status-heading'));
     currentStatus = getStatus(statusMessageElements);
-    if (currentStatus !== prevStatus && currentStatus !== STATUS_RUNNING){
-      sendNotification(currentStatus, prNumber);
+    if (currentStatus !== prevStatus && currentStatus !== STATUS_RUNNING && prevStatus !== STATUS_EMPTY){
+      var prNumber = window.location.href.split('/pull/')[1];
+      if (!isNaN(prNumber)){
+        sendNotification(currentStatus, prNumber);
+      }
     }
   },  5000); //Called every 5 seconds
 };
@@ -56,6 +58,7 @@ getStatus = function(statusElements){
       return STATUS_PASSED;
     }
   }
+  return STATUS_EMPTY;
 }
 
 elemContainsText = function(elem, text){
